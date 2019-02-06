@@ -9,9 +9,11 @@ from kegra.layers.graph import GraphConvolution
 from kegra.utils import *
 
 import time
+import sys
 
 # Define parameters
-DATASET = 'cora'
+COLLECTION = sys.argv[1] # read from command line argument (path of dataset)
+DATASET = sys.argv[2] # read from command line argument
 FILTER = 'localpool'  # 'chebyshev'
 MAX_DEGREE = 2  # maximum polynomial degree
 SYM_NORM = True  # symmetric (True) vs. left-only (False) normalization
@@ -19,7 +21,7 @@ NB_EPOCH = 200
 PATIENCE = 10  # early stopping patience
 
 # Get data
-X, A, y = load_data(dataset=DATASET)
+X, A, y = load_data(dataset=DATASET, path=COLLECTION)
 y_train, y_val, y_test, idx_train, idx_val, idx_test, train_mask = get_splits(y)
 
 # Normalize X
